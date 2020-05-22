@@ -397,6 +397,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   weapon: {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
+  weaponList:
+  - {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
+  emitterList:
+  - {fileID: 3287541853176907854, guid: bcbd3547d6c898b40b87f20a1e0b095f, type: 3}
   force: 250
 --- !u!95 &6698298677396363158
 Animator:
@@ -441,7 +445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3840895372412427373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.062, z: 0}
+  m_LocalPosition: {x: 0, y: 0.017, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 500276819099104069}
@@ -860,7 +864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7929179949672152988}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.3590516, y: 0.3387021, z: 0.115366094}
+  m_LocalPosition: {x: 0.3590516, y: 0.3387021, z: 0.1153661}
   m_LocalScale: {x: 6.1624675, y: 6.1624675, z: 11.162466}
   m_Children: []
   m_Father: {fileID: 6663767502202518853}
@@ -1018,7 +1022,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8350973303574667721}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.05851908, y: 0.227, z: 0.03224428}
+  m_LocalPosition: {x: 0.05851908, y: 0.182, z: 0.03224428}
   m_LocalScale: {x: 48, y: 46, z: 39}
   m_Children:
   - {fileID: 5565305463948645378}
@@ -1097,7 +1101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8373716924855635182}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2696941, y: 0.19, z: 0.05419919}
+  m_LocalPosition: {x: 0.2696941, y: 0.145, z: 0.05419919}
   m_LocalScale: {x: 0.6666665, y: 0.6666667, z: 0.6666665}
   m_Children:
   - {fileID: 6859525425268400073}

@@ -12,6 +12,10 @@ TagManager:
   - Enemy
   - Wall
   - Weapon
+  - PlayerCamera
+  - DungeonCreator
+  - MainUI
+  - Currency
   layers:
   - Default
   - TransparentFX
@@ -21,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 

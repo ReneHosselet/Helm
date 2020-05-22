@@ -5,12 +5,12 @@ using UnityEngine;
 public class Triggerzone : MonoBehaviour
 {
     private bool entered;
+    private DungeonCreator dC;
     // Start is called before the first frame update
     void Start()
     {
-
+        dC = GameObject.FindGameObjectWithTag("DungeonCreator").GetComponent<DungeonCreator>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -22,7 +22,8 @@ public class Triggerzone : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                GameObject.Find("DungeonCreator").GetComponent<DungeonCreator>().CreateDungeon();
+               dC.CreateDungeon();
+               dC.ShowInstructionText(null);
             }
         }
     }
@@ -35,10 +36,10 @@ public class Triggerzone : MonoBehaviour
                 {
                     entered = true;
                     this.transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                    dC.ShowInstructionText(gameObject);
                 }
                 break;
             default:
-                entered = false;
                 break;
         }
     }
@@ -51,6 +52,7 @@ public class Triggerzone : MonoBehaviour
                 {
                     entered = false;
                     this.transform.GetChild(0).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                    dC.ShowInstructionText(null);
                 }
                 break;
             default:

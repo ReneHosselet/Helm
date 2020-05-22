@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6470549242535991495}
+  - component: {fileID: 4659073396746926579}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Weapon
@@ -32,6 +33,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4659073396746926579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739045519499269505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ae071a5c15d944fb31c896046ed988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 3
+  baseSpeed: 0.15
+  weaponList:
+  - {fileID: 1739045519499269505}
+  emitterList:
+  - {fileID: 7087233549755943262, guid: bcbd3547d6c898b40b87f20a1e0b095f, type: 3}
+  hitEmitter: {fileID: 0}
 --- !u!1 &2612310404166168864
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,8 +200,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.07, y: 0.02, z: 0.20428331}
-  m_Center: {x: 0, y: 0, z: 0.105389394}
+  m_Size: {x: 0.10861638, y: 0.047817145, z: 0.19139913}
+  m_Center: {x: 0.00005349848, y: -0.0010799302, z: 0.0989473}
 --- !u!1001 &4519448745491643410
 PrefabInstance:
   m_ObjectHideFlags: 0

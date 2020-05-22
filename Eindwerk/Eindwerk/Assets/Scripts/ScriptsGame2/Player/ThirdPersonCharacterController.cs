@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonCharacterController : MonoBehaviour
 {
@@ -10,38 +11,64 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
     private GameObject weaponAnchorPoint;
     public GameObject weapon;
+    private WeaponScript heldWeapon;
     //private float angle = 90;
 
     private Camera cam;
     private Animator anim;
-    private TrailRenderer tR;
-    private Collider col;
 
-    //force
-    public float force;
+    //weapon prefab list
+    public List<GameObject> weaponList;
+    public List<GameObject> emitterList;
+    
     //coroutine vars
-    private bool running;
+    private bool isRunning;
+    //dungeoncreator
+    private DungeonCreator dC;
+    //damage modifier
+    private float damageModifiers;
 
     private void Start()
     {
         weaponAnchorPoint = transform.Find("bodyparts/right arm/hand/WeaponAnchorPoint").gameObject;
         rb = this.GetComponent<Rigidbody>();
-        cam = GameObject.Find("Camera Player").GetComponent<Camera>();
+        cam = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<Camera>();
         anim = this.GetComponent<Animator>();
-
+        dC = GameObject.FindGameObjectWithTag("DungeonCreator").GetComponent<DungeonCreator>();
         //instantiate current weapon and trail renderer
-        weapon = Instantiate(weapon,weaponAnchorPoint.transform);
-        tR = weapon.transform.Find("trail").GetComponent<TrailRenderer>();
-        col = weapon.transform.Find("collider").GetComponent<Collider>();
+        heldWeapon = Instantiate(weapon,weaponAnchorPoint.transform).GetComponent<WeaponScript>();
     }
     // Update is called once per frame
     void Update()
     {
         Attack();
+
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f) //scroll mousewheel
+        {
+            Zoom(Input.GetAxis("Mouse ScrollWheel"));
+        }
     }
     void FixedUpdate()
     {
         PlayerMovement();
+    }
+    
+    private void Zoom(float val)
+    {
+        if (val > 0f) // zoom out
+        {
+            if (cam.orthographicSize > 2)
+            {
+                cam.orthographicSize--;
+            }
+        }
+        else if (val < 0f) // zoom in
+        {
+            if (cam.orthographicSize < 10)
+            {
+                cam.orthographicSize++;
+            }
+        }
     }
     private void PlayerMovement()
     {
@@ -77,56 +104,61 @@ public class ThirdPersonCharacterController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             //attack1
-            if (!running)
+            if (!isRunning)
             {
-                running = true;
-                StartCoroutine(Attack1(weapon));
+                isRunning = true;
+                StartCoroutine(Attack1());
             }
         }
         else if (Input.GetButtonUp("Fire1"))
         {
         }
     }
-    private void DealDamage()
-    {
-        if (weapon.name.Substring(0, 5) == "Sword")
-        {
-            //set animations to sword
-        }
-    }
-    private IEnumerator Attack1(GameObject obj)
+    private IEnumerator Attack1()
     {
         float time = 0f;
-            switch (obj.name.Substring(0, 5))
+            switch (heldWeapon.CheckWeapon())
             {
-                case "Sword":
+                case "s":
                   //current attack1 anim = 0.15f
-                    time = 0.15f;
-                    col.enabled = true;
-                    tR.enabled = true;
+                    time = heldWeapon.baseSpeed;
+                    heldWeapon.ActivateAttack();
                     anim.SetBool("attack1", true);
                     yield return new WaitForSeconds(time);
-                    col.enabled = false;
                     anim.SetBool("attack1", false);
-                    col.enabled = false;
+                    heldWeapon.DeactivateAttack();
                     yield return new WaitForSeconds(time);
-                    tR.enabled = false;
                 break;
                 default:
                     break;
             }
-        running = false;
+        isRunning = false;
     }
+    //private void CheckWeapon()
+    //{
+    //    switch (weapon.name.Substring(0, 5))
+    //    {
+    //        //0 = sword effect
+    //        case "Sword":
+    //            hitEmmiter = emitterList[0].gameObject.GetComponent<ParticleSystem>();
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
         {
             case "Enemy":
-                other.attachedRigidbody.AddForce((other.transform.position - transform.position).normalized * force);
-                Debug.Log("HIT");
+                //pushback
+                other.attachedRigidbody.AddForce((other.transform.position - transform.position).normalized * heldWeapon.force);
+                Instantiate(heldWeapon.hitEmitter, other.transform.position, Quaternion.identity);
+                dC.CalculateDamage(other.gameObject,heldWeapon, damageModifiers);
                 break;
             default:
                 break;
         }
     }
+    
 }

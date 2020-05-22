@@ -62,10 +62,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\AddRoom.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\Destroyer.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\RoomSpawner.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\RoomTemplates.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\Agent.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\ChaseState.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\Condition.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\IdleState.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\LostSightCondition.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\SightCondition.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\State.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\TimeCondition.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\Vision.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\WanderState.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\DungeonCreation\BinarySpacePartitioner.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\DungeonCreation\CorridorNode.cs" />
@@ -78,8 +90,15 @@
     <Compile Include="Assets\Scripts\ScriptsGame2\DungeonCreation\RoomNode.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\DungeonCreation\StructureHelper.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\DungeonCreation\Triggerzone.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Emitter\ParticleCollision.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Emitter\ParticleEmission.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Pickups\PickUp.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Player\ThirdPersonCameraController.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Player\ThirdPersonCharacterController.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\UI\UIScript.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\UniversalMovement.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Weapon\WeaponScript.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
