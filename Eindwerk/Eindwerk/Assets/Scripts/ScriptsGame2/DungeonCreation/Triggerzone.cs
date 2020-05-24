@@ -22,7 +22,14 @@ public class Triggerzone : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-               dC.CreateDungeon();
+                if (gameObject.name.Substring(0,5) == "Level")
+                {
+                    dC.CreateDungeon(0);
+                }
+                else if (gameObject.name.Substring(0,4) == "Shop")
+                {
+                    dC.CreateDungeon(1);
+                }
                dC.ShowInstructionText(null);
             }
         }

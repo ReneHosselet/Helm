@@ -62,16 +62,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
+    <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
+    <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\AddRoom.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\Destroyer.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\RoomSpawner.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\RoomTemplates.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\Agent.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\AttackState.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\ChaseState.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\Condition.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\IdleState.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\InAttackRangeCondition.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\LostSightCondition.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\SightCondition.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\AI\StateMachine\State.cs" />
@@ -93,12 +102,33 @@
     <Compile Include="Assets\Scripts\ScriptsGame2\Emitter\ParticleCollision.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Emitter\ParticleEmission.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Enemy\InAttackRange.cs" />
+    <Compile Include="Assets\Scripts\ScriptsGame2\Objects\Breakable.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Pickups\PickUp.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Player\ThirdPersonCameraController.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Player\ThirdPersonCharacterController.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\UI\UIScript.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\UniversalMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Weapon\WeaponScript.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -664,7 +694,16 @@
       <HintPath>D:/Documenten/KDG/Eindwerk/Eindwerk/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{3E4108A9-A105-46B4-66CB-F8A651E09192}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{3B884BF7-030E-5288-E55D-E6A008CFF335}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

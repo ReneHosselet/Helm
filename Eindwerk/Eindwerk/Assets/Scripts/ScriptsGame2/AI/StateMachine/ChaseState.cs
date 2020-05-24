@@ -5,7 +5,13 @@ using UnityEngine;
 public class ChaseState : State
 {
     public GameObject indicator;
+    private Enemy enemy;
+    public float attackDistance = 3.0f;
 
+    private void Start()
+    {
+        enemy = gameObject.GetComponent<Enemy>();
+    }
     public override void OnEnable()
     {
         base.OnEnable();
@@ -28,8 +34,16 @@ public class ChaseState : State
         {
             return;
         }
+        var distance = Vector3.Distance(agent.target.transform.position, gameObject.transform.position);
         var direction = agent.target.transform.position - gameObject.transform.position;
         direction.Normalize();
-        movementController.Move(gameObject.transform.InverseTransformDirection(direction));
+        if (distance <= attackDistance)
+        {
+            enemy.Attack();
+        }
+        else
+        {
+            movementController.Move(gameObject.transform.InverseTransformDirection(direction));
+        }
     }
 }

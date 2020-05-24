@@ -563,8 +563,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.5775204, y: 1.0454687, z: 4.3575745}
-  m_Center: {x: 2.529853, y: 0.10390409, z: 0.11624336}
+  m_Size: {x: 8.914301, y: 1.0454687, z: 4.3575745}
+  m_Center: {x: 3.474126, y: 0.10390409, z: 0.116243355}
 --- !u!114 &6721881846217550612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1498,6 +1498,7 @@ MonoBehaviour:
   - condition: {fileID: 11400000, guid: 1c520206087f44942ae306c1708bafad, type: 2}
     target: {fileID: 7965488118460886887}
   indicator: {fileID: 3120919865112647778}
+  attackDistance: 3
 --- !u!114 &7965488118460886887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,3 +1553,4 @@ MonoBehaviour:
   unmodifiedHealth: 20
   healthModifier: 5
   weapon: {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
+  damageModifiers: 0

@@ -9,6 +9,7 @@ public class State : MonoBehaviour
     public Agent agent;
     public List<Transition> transitions = new List<Transition>();
     protected UniversalMovement movementController;
+
     // Start is called before the first frame update
     void Awake()
     {

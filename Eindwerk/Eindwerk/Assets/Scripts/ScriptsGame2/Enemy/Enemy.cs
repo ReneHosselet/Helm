@@ -16,7 +16,10 @@ public class Enemy : MonoBehaviour
     private WeaponScript heldWeapon;
     private GameObject weaponAnchorPoint;
     //damage modifier
-    private float damageModifiers;
+    public float damageModifiers = 0;
+    //animator
+    private Animator anim;
+    private bool isAttackRunning;
 
     private GameObject canvas;
     private GameObject sliderObj;
@@ -27,6 +30,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         weaponAnchorPoint = transform.Find("body/hand/weaponAnchorPoint").gameObject;
+        //animator
+        anim = gameObject.GetComponent<Animator>();
         //healthbar on start
         canvas = gameObject.transform.Find("Canvas").gameObject;
         sliderObj = canvas.transform.GetChild(0).GetComponentInChildren<Slider>().gameObject;
@@ -37,7 +42,7 @@ public class Enemy : MonoBehaviour
         heldWeapon = Instantiate(weapon, weaponAnchorPoint.transform).GetComponent<WeaponScript>();
 
         //start health
-        maxHealth = unmodifiedHealth + (healthModifier * dC.currentDungeonLevel);
+        maxHealth = unmodifiedHealth + (healthModifier * (dC.currentDungeonLevel/2));
         health = maxHealth;
 
         slider.value = dC.CalculateHealth(health,maxHealth);
@@ -62,11 +67,6 @@ public class Enemy : MonoBehaviour
             dC.OnDeath(gameObject);
         }
     }
-    //private void OnDeath()
-    //{
-    //    //enemy on death
-    //    Destroy(gameObject);
-    //}
     private void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
@@ -78,5 +78,32 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
+    }
+    public void Attack()
+    {
+        if (!isAttackRunning)
+        {
+            StartCoroutine(AttackSequence());
+        }
+    }
+    private IEnumerator AttackSequence()
+    {
+        float time = 0f;
+        switch (heldWeapon.CheckWeapon())
+        {
+            case "s":
+                //current swordattack anim 
+                time = heldWeapon.baseSpeed;
+                heldWeapon.ActivateAttack();
+                anim.SetBool("IsInAttackRange", true);
+                yield return new WaitForSeconds(time);
+                anim.SetBool("IsInAttackRange", false);
+                heldWeapon.DeactivateAttack();
+                yield return new WaitForSeconds(time);
+                break;
+            default:
+                break;
+        }
+        isAttackRunning = false;
     }
 }

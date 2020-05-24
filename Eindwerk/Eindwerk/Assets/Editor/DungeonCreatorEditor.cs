@@ -12,7 +12,7 @@ public class DungeonCreatorEditor : Editor
         DungeonCreator dungeonCreator = (DungeonCreator)target;
         if (GUILayout.Button("CreateNewDungeon"))
         {
-            dungeonCreator.CreateDungeon();
+            dungeonCreator.CreateDungeon(0);
         }
     }
 }

@@ -16,6 +16,8 @@ TagManager:
   - DungeonCreator
   - MainUI
   - Currency
+  - PickUp
+  - Breakable
   layers:
   - Default
   - TransparentFX

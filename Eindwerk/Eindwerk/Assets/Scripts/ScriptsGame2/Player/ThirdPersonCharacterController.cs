@@ -25,8 +25,6 @@ public class ThirdPersonCharacterController : MonoBehaviour
     private bool isRunning;
     //dungeoncreator
     private DungeonCreator dC;
-    //damage modifier
-    private float damageModifiers;
 
     private void Start()
     {
@@ -134,31 +132,4 @@ public class ThirdPersonCharacterController : MonoBehaviour
             }
         isRunning = false;
     }
-    //private void CheckWeapon()
-    //{
-    //    switch (weapon.name.Substring(0, 5))
-    //    {
-    //        //0 = sword effect
-    //        case "Sword":
-    //            hitEmmiter = emitterList[0].gameObject.GetComponent<ParticleSystem>();
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
-    private void OnTriggerEnter(Collider other)
-    {
-        switch (other.tag)
-        {
-            case "Enemy":
-                //pushback
-                other.attachedRigidbody.AddForce((other.transform.position - transform.position).normalized * heldWeapon.force);
-                Instantiate(heldWeapon.hitEmitter, other.transform.position, Quaternion.identity);
-                dC.CalculateDamage(other.gameObject,heldWeapon, damageModifiers);
-                break;
-            default:
-                break;
-        }
-    }
-    
 }
