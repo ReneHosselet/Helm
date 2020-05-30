@@ -175,9 +175,9 @@ MonoBehaviour:
   roomTopCornerModifier: 0.9
   roomOffset: 1
   positionOffsetFromMiddle: 2
-  wallVertical: {fileID: 6077571724630171092, guid: bdd4806e58773f743a9b43d97260c24b,
+  wallVertical: {fileID: 3163854743914913192, guid: 92cc835975aea5f4689843dc5f122924,
     type: 3}
-  wallHorizontal: {fileID: 4395845652980272375, guid: 21a5c029ac0e28041a6b371e5943c2dd,
+  wallHorizontal: {fileID: 9062182380332037991, guid: 8b913afcd67db2e41881f761378ef3a6,
     type: 3}
   startPoint: {fileID: 4411563153279276753, guid: 83b8ecd60a1e851458720b71d9f46e09,
     type: 3}
@@ -195,12 +195,19 @@ MonoBehaviour:
   currentDungeonLevel: 0
   corridorObjectList:
   - {fileID: 612607111066733513, guid: a989b82b5dc1f17489e2257dc1a5f4c6, type: 3}
-  currencyModel: {fileID: 7032365619881104961, guid: e0d63d23b0165d149b63a493a594d8b3,
+  currencyModel: {fileID: 98476135684508254, guid: 96cfbeba4d7c12945ad3dcd2328de432,
     type: 3}
   health: 0
   playerAttackUp: 0
   BloodEffect: {fileID: 5607929740097988294, guid: 97287b58ea4078441b961f13cca26c66,
     type: 3}
+  weaponList:
+  - {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
+  - {fileID: 8158885327936718347, guid: a98e97e27b1385640b62e7b9b79a5d3c, type: 3}
+  emitterList:
+  - {fileID: 7087233549755943262, guid: bcbd3547d6c898b40b87f20a1e0b095f, type: 3}
+  bossList:
+  - {fileID: 661099305844719571, guid: d12f27363131ee344bce190cc7e53158, type: 3}
 --- !u!1 &361345083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.9987, y: -355.1}
+  m_AnchoredPosition: {x: -4.0013, y: -271}
   m_SizeDelta: {x: 1912.0026, y: 140.09041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1726514662
@@ -1634,7 +1641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9e0d5507dde0a1498f73c8b4e43591f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d8ec3ee9e3de634fa9da30f458547cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

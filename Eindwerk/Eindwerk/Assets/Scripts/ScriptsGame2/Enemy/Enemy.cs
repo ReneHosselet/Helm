@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public float healthModifier = 5f;
     //weapon
     public GameObject weapon;
-    private WeaponScript heldWeapon;
+    public WeaponScript heldWeapon;
     private GameObject weaponAnchorPoint;
     //damage modifier
     public float damageModifiers = 0;
@@ -21,15 +21,18 @@ public class Enemy : MonoBehaviour
     private Animator anim;
     private bool isAttackRunning;
 
+    public bool isBoss;
+
     private GameObject canvas;
     private GameObject sliderObj;
     private Slider slider;
 
     private DungeonCreator dC;
+    public bool isEnraged;
 
     private void Start()
     {
-        weaponAnchorPoint = transform.Find("body/hand/weaponAnchorPoint").gameObject;
+        CheckMob();
         //animator
         anim = gameObject.GetComponent<Animator>();
         //healthbar on start
@@ -49,16 +52,36 @@ public class Enemy : MonoBehaviour
     }
     public void Update()
     {
+        if (weaponAnchorPoint = null)
+        {
+            CheckMob();
+        }
         slider.value = dC.CalculateHealth(health, maxHealth);
 
-        //show health bars if damaged
-        if (health < maxHealth)
+        if (!isBoss)
         {
-            sliderObj.SetActive(true);
+            //show health bars if damaged
+            if (health < maxHealth)
+            {
+                sliderObj.SetActive(true);
+            }
+            else if (health >= maxHealth)
+            {
+                sliderObj.SetActive(false);
+            }
         }
-        else if (health >= maxHealth)
+        //check boss is over healthtreshold
+        
+        if (isBoss)
         {
-            sliderObj.SetActive(false);
+            if (health <= maxHealth / 2)
+            {
+                if (!isEnraged)
+                {
+                    anim.SetTrigger("Enraged");
+                    isEnraged = true;
+                }
+            }            
         }
         //check death
         if (health <= 0)
@@ -81,9 +104,12 @@ public class Enemy : MonoBehaviour
     }
     public void Attack()
     {
-        if (!isAttackRunning)
+        if (!isBoss)
         {
-            StartCoroutine(AttackSequence());
+            if (!isAttackRunning)
+            {
+                StartCoroutine(AttackSequence());
+            }
         }
     }
     private IEnumerator AttackSequence()
@@ -106,4 +132,17 @@ public class Enemy : MonoBehaviour
         }
         isAttackRunning = false;
     }
+    private void CheckMob()
+    {
+        if (this.name.Substring(0, 4) == "Boss")
+        {
+            isBoss = true;
+            weaponAnchorPoint = transform.Find("RightArm/hand/weaponAnchorPoint").gameObject;
+        }
+        else
+        {
+            isBoss = false;
+            weaponAnchorPoint = transform.Find("body/hand/weaponAnchorPoint").gameObject;
+        }
+    } 
 }

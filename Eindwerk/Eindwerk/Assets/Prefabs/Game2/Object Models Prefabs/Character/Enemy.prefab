@@ -1413,7 +1413,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 3
 --- !u!95 &5288291498576867342
 Animator:
@@ -1554,3 +1554,4 @@ MonoBehaviour:
   healthModifier: 5
   weapon: {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
   damageModifiers: 0
+  isBoss: 0

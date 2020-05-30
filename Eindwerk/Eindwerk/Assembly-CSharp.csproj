@@ -62,6 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AttackBehaviour.cs" />
+    <Compile Include="Assets\ChargeAnticipationBehaviour.cs" />
+    <Compile Include="Assets\ChargeBehaviour.cs" />
+    <Compile Include="Assets\ChaseBehaviour.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
@@ -69,6 +73,9 @@
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\EnragedBehaviour.cs" />
+    <Compile Include="Assets\IdleBehaviour.cs" />
+    <Compile Include="Assets\IntroBehaviour.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\AddRoom.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame1\Destroyer.cs" />
@@ -110,6 +117,8 @@
     <Compile Include="Assets\Scripts\ScriptsGame2\UI\UIScript.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\UniversalMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Weapon\WeaponScript.cs" />
+    <Compile Include="Assets\TiredBehaviour.cs" />
+    <Compile Include="Assets\WhirlwindBehaviour.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

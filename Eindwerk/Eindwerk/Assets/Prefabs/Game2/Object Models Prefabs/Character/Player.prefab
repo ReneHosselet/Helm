@@ -367,7 +367,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!136 &3412488451085901987
 CapsuleCollider:
@@ -401,7 +401,6 @@ MonoBehaviour:
   - {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
   emitterList:
   - {fileID: 3287541853176907854, guid: bcbd3547d6c898b40b87f20a1e0b095f, type: 3}
-  force: 250
 --- !u!95 &6698298677396363158
 Animator:
   serializedVersion: 3

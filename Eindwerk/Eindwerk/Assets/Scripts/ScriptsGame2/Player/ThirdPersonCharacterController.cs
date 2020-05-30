@@ -94,7 +94,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
         if (Physics.Raycast(mouseRay,out hit, 100))
         {
-            transform.LookAt(new Vector3(hit.point.x,this.transform.position.y, hit.point.z));
+                transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
         }
     }
     private void Attack()

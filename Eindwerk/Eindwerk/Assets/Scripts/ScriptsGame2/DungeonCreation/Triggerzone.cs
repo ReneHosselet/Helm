@@ -45,6 +45,15 @@ public class Triggerzone : MonoBehaviour
                     this.transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
                     dC.ShowInstructionText(gameObject);
                 }
+                //start animation if this is boss
+                else if (this.transform.parent.name.Substring(0,4)=="Boss")
+                {
+                    this.transform.parent.Find("Canvas").gameObject.SetActive(true);
+                                        
+                    this.transform.parent.GetComponent<Collider>().enabled = true;
+                    this.GetComponent<Collider>().enabled = false;
+                    this.transform.parent.GetComponent<Animator>().SetTrigger("Start");
+                }
                 break;
             default:
                 break;

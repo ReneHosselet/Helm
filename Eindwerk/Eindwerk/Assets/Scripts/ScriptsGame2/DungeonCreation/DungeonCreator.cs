@@ -70,7 +70,12 @@ public class DungeonCreator : MonoBehaviour
     public float playerAttackUp = 0;
     //effects
     public GameObject BloodEffect;
-
+    //collection lists
+    public List<GameObject> weaponList;
+    public List<ParticleSystem> emitterList;
+    public List<GameObject> bossList;
+    //temp vars
+    private GameObject bossTeleport;
     // Start is called before the first frame update
     void Start()
     {
@@ -164,11 +169,16 @@ public class DungeonCreator : MonoBehaviour
             isBoss = true;
             dungeonWidth = 40;
             dungeonLength = 40;
-            roomLengthMin = 10;
+            roomLengthMin =40;
             roomWidthMin = 40;
-            maxIterations = 1;
+            maxIterations = 0;
         }
         DestroyAllChildren();
+        if (dungeonWidth > 100 && dungeonLength > 100)
+        {
+            dungeonWidth = 85;
+            dungeonLength = 85;
+        }
         DungeonGenerator generator = new DungeonGenerator(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,roomWidthMin,roomLengthMin,roomBottomCornerModifier,roomTopCornerModifier,roomOffset, corridorWidth);
 
@@ -186,8 +196,16 @@ public class DungeonCreator : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    //startroom
-                    CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, "Start");
+                    if (typeLevel != 2)
+                    {
+                        //startroom
+                        CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, "Start");
+                    }
+                    else
+                    {
+                        //bossroom
+                        CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, "Boss");
+                    }
                 }
                 else if (i == generator.roomCount.Count - 1)
                 {
@@ -261,7 +279,7 @@ public class DungeonCreator : MonoBehaviour
     }
     private void DungeonModifier()
     {
-        //increases dungeon size with set lenght and width
+        //increases dungeon size with set length and width
         dungeonWidth += roomWidthMin;
         dungeonLength += roomLengthMin;
         Debug.Log(currentDungeonLevel);
@@ -391,8 +409,17 @@ public class DungeonCreator : MonoBehaviour
                 RandomSpawner(bottomLeftCorner, topRightCorner, "enemies", parent);
                 break;
             case "PickUp":
-                //set pickup on room
-                Instantiate(pickUpList[Random.Range(0, pickUpList.Count)], middle, Quaternion.identity, parent.transform);
+                if (Random.Range(0,20) == 0)
+                {
+                    //set pickup on room
+                    var inst = Instantiate(pickUpList[Random.Range(0, pickUpList.Count)], middle, Quaternion.identity, parent.transform);
+                    inst.GetComponent<PickUp>().currencyValue = 0;
+                }
+                else
+                {
+                    //spawns random enemies
+                    RandomSpawner(bottomLeftCorner, topRightCorner, "enemies", parent);
+                }
                 break;
             case "Shop":
                 //3 pickups per shop level + player and teleport to next level zone
@@ -407,7 +434,12 @@ public class DungeonCreator : MonoBehaviour
                 break;
             case "Boss":
                 //boss spawn
-                Instantiate(enemyList[0], new Vector3(middle.x, enemyList[0].gameObject.transform.localScale.y / 2, middle.z + positionOffsetFromMiddle), Quaternion.identity, parent.transform);
+                Instantiate(bossList[0], new Vector3(middle.x, enemyList[0].gameObject.transform.localScale.y /2, middle.z + positionOffsetFromMiddle * 3), Quaternion.identity, parent.transform);
+                //player spawn
+                spawnedPlayer = Instantiate(player, new Vector3(middle.x, player.gameObject.transform.localScale.y / 2, middle.z - positionOffsetFromMiddle * 3), Quaternion.identity, parent.transform);
+                //instantiate teleporter and turns this inactive
+                bossTeleport =  Instantiate(teleportZones[1], new Vector3(middle.x, 0, middle.z), Quaternion.identity, gameObject.transform);
+                bossTeleport.SetActive(false);
                 break;
             case "Empty":
                 if (Random.Range(0, 3) == 0)
@@ -495,8 +527,7 @@ public class DungeonCreator : MonoBehaviour
                             break;
                         default:
                             break;
-                    }
-                    
+                    }                    
                 }
                 break;
             case "pickup":
@@ -515,9 +546,17 @@ public class DungeonCreator : MonoBehaviour
         switch (obj.tag)
         {
             case "Enemy":
-                //spawns coin
-                Instantiate(currencyModel, obj.transform.position, Quaternion.Euler(90,0,0),gameObject.transform);
-                Instantiate(BloodEffect, obj.transform.position, Quaternion.identity);
+                if (obj.name.Substring(0,4) == "Boss")
+                {
+                    //teleporter to next room active
+                    bossTeleport.SetActive(true);
+                }
+                else
+                {
+                    //spawns coin
+                    Instantiate(currencyModel, obj.transform.position, Quaternion.Euler(90, 0, 0), gameObject.transform);
+                    Instantiate(BloodEffect, obj.transform.position, Quaternion.identity);
+                }
                 break;
             case "Player":
                 break;
@@ -559,7 +598,7 @@ public class DungeonCreator : MonoBehaviour
                     instructionText.text = "Press 'SPACE' to continue";
                     break;
                 case "PickUp":
-                    instructionText.text = "Press 'Space' to Buy";
+                    instructionText.text = "Press 'SPACE' to Buy";
                     break;
                 default:
                     break;

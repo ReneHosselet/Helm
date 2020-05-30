@@ -6,10 +6,7 @@ public class WeaponScript : MonoBehaviour
 {
     public float baseDamage;
     public float baseSpeed;
-
-    public List<GameObject> weaponList;
-    public List<ParticleSystem> emitterList;
-
+    
     private TrailRenderer tR;
     private Collider col;
     //wielder
@@ -42,10 +39,14 @@ public class WeaponScript : MonoBehaviour
         {
             //0 = sword effect
             case "Sword":
-                baseDamage = 3;
-                baseSpeed = 0.15f;
+                hitEmitter = dC.emitterList[0];
                 force = 1000f;
                 weap = "s";
+                break;
+            case "Spear":
+                //spear effects en param
+                hitEmitter = dC.emitterList[0];
+                force = 500f;
                 break;
             default:
                 break;
@@ -67,20 +68,16 @@ public class WeaponScript : MonoBehaviour
         if (wielder.CompareTag("Player") && other.CompareTag("Enemy"))
         {
             //enemy gets damaged
-            hitEmitter = emitterList[0];
             DoDamage(other,dC.playerAttackUp);
         }
         else if (wielder.CompareTag("Enemy") && other.CompareTag("Player"))
         {
             //player gets damaged
-            hitEmitter = emitterList[0];
             DoDamage(other, wielder.GetComponentInParent<Enemy>().damageModifiers);
         }
         else if (wielder.CompareTag("Player") && other.CompareTag("Breakable"))
         {
             //deals damage to breakable
-            //set emitter to woodeffect
-            hitEmitter = emitterList[1];
             DoDamage(other, dC.playerAttackUp);
         }
         else
