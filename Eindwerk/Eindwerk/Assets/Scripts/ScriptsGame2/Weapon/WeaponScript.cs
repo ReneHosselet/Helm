@@ -48,6 +48,11 @@ public class WeaponScript : MonoBehaviour
                 hitEmitter = dC.emitterList[0];
                 force = 500f;
                 break;
+            case "Stave":
+                hitEmitter = dC.emitterList[0];
+                force = 1000f;
+                weap = "st";
+                break;
             default:
                 break;
         }

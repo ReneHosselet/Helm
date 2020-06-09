@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 782901871400529039}
   - component: {fileID: 782901871400529026}
   - component: {fileID: 782901871400529038}
+  - component: {fileID: 8689988856757303849}
   m_Layer: 0
   m_Name: APUp
   m_TagString: PickUp
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23336bd8af6cb614eaa2db76e91f4d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyValue: 1
+  currencyValue: 2
   pickUpValue: 1
 --- !u!65 &782901871400529038
 BoxCollider:
@@ -183,6 +184,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 29.459682, z: 10}
   m_Center: {x: 0, y: 14.672694, z: 0}
+--- !u!95 &8689988856757303849
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782901871400529033}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab2a1d9f0117ba84a82dbc8730631cb2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &782901871509599615
 GameObject:
   m_ObjectHideFlags: 0

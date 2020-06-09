@@ -19,6 +19,9 @@ TagManager:
   - PickUp
   - Breakable
   - Ground
+  - Fog
+  - ParentFog
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -30,7 +33,7 @@ TagManager:
   - 
   - Ground
   - Boss
-  - 
+  - FogOfWar
   - 
   - 
   - 

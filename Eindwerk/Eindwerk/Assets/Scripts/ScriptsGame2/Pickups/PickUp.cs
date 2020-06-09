@@ -13,6 +13,7 @@ public class PickUp : MonoBehaviour
     private int rand;
     private int modifyPerXLevels = 3;
     private Text currencyTxt;
+    private Image currencyIcon;
     private bool enteredArea;
 
     // Start is called before the first frame update
@@ -63,7 +64,17 @@ public class PickUp : MonoBehaviour
     private void ShowCost(int value)
     {
         currencyTxt = transform.GetComponentInChildren<Text>();
-        currencyTxt.text = value.ToString();
+        currencyIcon = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        if (value == 0)
+        {
+            currencyTxt.text ="";
+            currencyIcon.enabled = false;
+        }
+        else
+        {
+            currencyTxt.text = value.ToString();
+        }
+        
     }
     private void OnTriggerEnter(Collider other)
     {

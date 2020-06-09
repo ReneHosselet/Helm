@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 299095100460360929}
   - component: {fileID: 299095100460360940}
   - component: {fileID: 299095100460360928}
+  - component: {fileID: 2509560045415019006}
   m_Layer: 0
   m_Name: Heal
   m_TagString: PickUp
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23336bd8af6cb614eaa2db76e91f4d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyValue: 10
+  currencyValue: 3
   pickUpValue: 30
 --- !u!65 &299095100460360928
 BoxCollider:
@@ -297,6 +298,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 29.459682, z: 10}
   m_Center: {x: 0, y: 14.672694, z: 0}
+--- !u!95 &2509560045415019006
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299095100460360935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b466dfdd0bfa90498a52b180f106219, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &299095100636511505
 GameObject:
   m_ObjectHideFlags: 0

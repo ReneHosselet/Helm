@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         //player = GameObject.Find("Player(Clone)");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

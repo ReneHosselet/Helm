@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private bool isAttackRunning;
 
     public bool isBoss;
+    private bool isRange;
 
     private GameObject canvas;
     private GameObject sliderObj;
@@ -30,6 +31,15 @@ public class Enemy : MonoBehaviour
     private DungeonCreator dC;
     public bool isEnraged;
 
+    public GameObject projectile;
+
+    public GameObject dirPointer;
+
+    //protrets for bosses
+    public Image bossPortret;
+    public List<Sprite> bossAvatars;
+    
+    private float time;
     private void Start()
     {
         CheckMob();
@@ -49,6 +59,8 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
 
         slider.value = dC.CalculateHealth(health,maxHealth);
+
+        time = heldWeapon.baseSpeed;
     }
     public void Update()
     {
@@ -77,11 +89,12 @@ public class Enemy : MonoBehaviour
             if (health <= maxHealth / 2)
             {
                 if (!isEnraged)
-                {
+                {                    
                     anim.SetTrigger("Enraged");
                     isEnraged = true;
                 }
-            }            
+            }
+            changeBossAvatar();
         }
         //check death
         if (health <= 0)
@@ -104,7 +117,7 @@ public class Enemy : MonoBehaviour
     }
     public void Attack()
     {
-        if (!isBoss)
+        if (!isBoss && !isRange)
         {
             if (!isAttackRunning)
             {
@@ -114,7 +127,6 @@ public class Enemy : MonoBehaviour
     }
     private IEnumerator AttackSequence()
     {
-        float time = 0f;
         switch (heldWeapon.CheckWeapon())
         {
             case "s":
@@ -136,13 +148,40 @@ public class Enemy : MonoBehaviour
     {
         if (this.name.Substring(0, 4) == "Boss")
         {
+            projectile = null;
             isBoss = true;
+            isRange = false;
             weaponAnchorPoint = transform.Find("RightArm/hand/weaponAnchorPoint").gameObject;
+        }
+        else if (this.name.Substring(0, 4) == "Mage")
+        {
+            isBoss = false;
+            isRange = true;
+            weaponAnchorPoint = transform.Find("body/RightArm/hand/weaponAnchorPoint").gameObject;
         }
         else
         {
+            projectile = null;
             isBoss = false;
+            isRange = false;
             weaponAnchorPoint = transform.Find("body/hand/weaponAnchorPoint").gameObject;
         }
-    } 
+    }
+    private void changeBossAvatar()
+    {
+        float currhealth = health / maxHealth;
+
+        if (currhealth >= 0.75)
+        {
+            bossPortret.sprite = bossAvatars[0];
+        }
+        else if (currhealth < 0.75 && currhealth > 0.25)
+        {
+            bossPortret.sprite = bossAvatars[1];
+        }
+        else if (currhealth <= 0.25)
+        {
+            bossPortret.sprite = bossAvatars[2];
+        }
+    }
 }

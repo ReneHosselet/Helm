@@ -11,8 +11,14 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
     private GameObject weaponAnchorPoint;
     public GameObject weapon;
-    private WeaponScript heldWeapon;
+    public WeaponScript heldWeapon;
     //private float angle = 90;
+
+    //movement
+    private Vector3 hitPoint;
+    private Vector3 dir;
+    //--dash
+    public GameObject dashWings;
 
     private Camera cam;
     private Animator anim;
@@ -25,6 +31,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
     private bool isRunning;
     //dungeoncreator
     private DungeonCreator dC;
+    //dash
+    private bool isDashing;
 
     private void Start()
     {
@@ -45,10 +53,21 @@ public class ThirdPersonCharacterController : MonoBehaviour
         {
             Zoom(Input.GetAxis("Mouse ScrollWheel"));
         }
+        if (!dashWings.activeSelf)
+        {
+            if (dC.hasDash)
+            {
+                dashWings.SetActive(true);
+            }
+        }
     }
     void FixedUpdate()
     {
         PlayerMovement();
+        if (isDashing)
+        {
+            rb.AddForce(dir.normalized * dC.dashDistance, ForceMode.VelocityChange);
+        }
     }
     
     private void Zoom(float val)
@@ -94,7 +113,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
         if (Physics.Raycast(mouseRay,out hit, 100))
         {
+            if (!isDashing)
+            {
                 transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
+                hitPoint = new Vector3(hit.point.x, this.transform.position.y, hit.point.z);
+            }
         }
     }
     private void Attack()
@@ -108,9 +131,27 @@ public class ThirdPersonCharacterController : MonoBehaviour
                 StartCoroutine(Attack1());
             }
         }
-        else if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonDown("Fire2"))
         {
+            if (dC.hasDash)
+            {
+                if (!isDashing)
+                {
+                    StartCoroutine(Dash());
+                }
+            }
         }
+    }
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        anim.SetTrigger("Dash");        
+        dashWings.GetComponentInChildren<TrailRenderer>().emitting = true;
+        dir = hitPoint - this.transform.position;
+        yield return new WaitForSeconds(0.2f);
+        isDashing = false;
+        dashWings.GetComponentInChildren<TrailRenderer>().emitting = false;
+        anim.SetTrigger("Idle");
     }
     private IEnumerator Attack1()
     {
