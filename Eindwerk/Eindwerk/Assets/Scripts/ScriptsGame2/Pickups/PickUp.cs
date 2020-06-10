@@ -83,7 +83,10 @@ public class PickUp : MonoBehaviour
             enteredArea = true;
             if (gameObject.CompareTag("Currency"))
             {
+                //0 == coin sound
+                
                 dC.CalculateCurrency(currencyValue);
+                dC.PlaySound(dC.audioPickupList[0]);
                 Destroy(gameObject);
             }
             else

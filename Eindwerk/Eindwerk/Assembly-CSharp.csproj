@@ -142,6 +142,7 @@
     <Compile Include="Assets\Scripts\ScriptsGame2\UniversalMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Weapon\Projectile.cs" />
     <Compile Include="Assets\Scripts\ScriptsGame2\Weapon\WeaponScript.cs" />
+    <Compile Include="Assets\VolumeControl.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

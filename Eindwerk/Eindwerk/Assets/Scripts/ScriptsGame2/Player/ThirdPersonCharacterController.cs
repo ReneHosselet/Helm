@@ -33,6 +33,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
     private DungeonCreator dC;
     //dash
     private bool isDashing;
+    private bool runningSound = false;
 
     private void Start()
     {
@@ -59,6 +60,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
             {
                 dashWings.SetActive(true);
             }
+        }
+        if (dC.isDead)
+        {
+            dC.audioFootstepsList[0].Stop();
+            this.gameObject.SetActive(false);
         }
     }
     void FixedUpdate()
@@ -96,14 +102,25 @@ public class ThirdPersonCharacterController : MonoBehaviour
         //rb.MovePosition(transform.position + new Vector3(hor, 0f, ver).normalized * speed * Time.deltaTime);
         rb.velocity = new Vector3(hor, 0f, ver).normalized * speed * Time.deltaTime;
 
+        
         //set run animation
         if (rb.velocity.magnitude > 0)
         {
             anim.SetBool("running",true);
+                    
+            if (!runningSound)
+            {
+                //0 = player footsteps 
+                dC.audioFootstepsList[0].Play();
+                runningSound = true;
+            }
         }
         else
         {
             anim.SetBool("running", false);
+            //0 = player footsteps
+            dC.audioFootstepsList[0].Stop();
+            runningSound = false;
         }
 
         
@@ -147,6 +164,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
         isDashing = true;
         anim.SetTrigger("Dash");        
         dashWings.GetComponentInChildren<TrailRenderer>().emitting = true;
+        //1 = Dashsound
+        dC.PlaySound(dC.audioEffectList[1]);
         dir = hitPoint - this.transform.position;
         yield return new WaitForSeconds(0.2f);
         isDashing = false;
@@ -163,7 +182,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
                     time = heldWeapon.baseSpeed;
                     heldWeapon.ActivateAttack();
                     anim.SetBool("attack1", true);
-                    yield return new WaitForSeconds(time);
+                dC.PlaySound(dC.audioEffectList[0]);
+                yield return new WaitForSeconds(time);
                     anim.SetBool("attack1", false);
                     heldWeapon.DeactivateAttack();
                     yield return new WaitForSeconds(time);

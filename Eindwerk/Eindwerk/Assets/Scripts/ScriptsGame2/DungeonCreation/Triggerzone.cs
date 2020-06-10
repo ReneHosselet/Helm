@@ -31,6 +31,8 @@ public class Triggerzone : MonoBehaviour
                     StartCoroutine(dC.Transition(1));
                 }
                dC.ShowInstructionText(null);
+                //0 = teleport
+                dC.audioMagicList[0].Play();
             }
         }
     }

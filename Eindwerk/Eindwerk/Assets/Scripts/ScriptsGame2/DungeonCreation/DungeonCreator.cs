@@ -88,14 +88,23 @@ public class DungeonCreator : MonoBehaviour
     public List<GameObject> weaponList;
     public List<ParticleSystem> emitterList;
     public List<GameObject> bossList;
+    //sound vars
+    public List<AudioSource> audioPickupList;
+    public List<AudioSource> audioEffectList;
+    public List<AudioSource> audioFootstepsList;
+    public List<AudioSource> dungeonMusicList;
+    public List<AudioSource> bossMusicList;
+    public List<AudioSource> gameOverMusic;
+    public List<AudioSource> audioMagicList;
     //temp vars
     private GameObject bossTeleport;
     public GameObject parentFogObject;
     private bool isBossRoom =false;
+    public bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
-
         StartCoroutine(Transition(0));
         //get ui elements
         canvasUI = GameObject.FindGameObjectWithTag("MainUI");
@@ -113,8 +122,10 @@ public class DungeonCreator : MonoBehaviour
         slider.value = CalculateHealth(health,baseHealth);
         ShowInstructionText(null);
         CalculateCurrency(currency);
+        //start dungeon BGM
+        PlaySound(dungeonMusicList[0]);
         //parent fog 
-        parentFogObject = GameObject.FindGameObjectWithTag("ParentFog");
+        //parentFogObject = GameObject.FindGameObjectWithTag("ParentFog");
     }
 
     // Update is called once per frame
@@ -123,7 +134,10 @@ public class DungeonCreator : MonoBehaviour
         slider.value = CalculateHealth(health, baseHealth);
         if (health <= 0 )
         {
-            PlayerDeath();
+            if (!isDead)
+            {
+                PlayerDeath();
+            }
         }
         //enlarge map + show stats
         if (Input.GetKeyDown(KeyCode.Tab) && !isMenuOpen)
@@ -149,10 +163,6 @@ public class DungeonCreator : MonoBehaviour
         {
             CalculateCurrency(1);
         }
-        if (health < 0 )
-        {
-            OnDeath(spawnedPlayer);
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             instructionText.text = "";
@@ -169,10 +179,15 @@ public class DungeonCreator : MonoBehaviour
             if (!isBoss)
             {
                 typeLevel = 2;
+                //play boss music
+                dungeonMusicList[0].Stop();
+                PlaySound(bossMusicList[0]);
             }
             else if (isBoss)
             {
                 isBoss = false;
+                bossMusicList[0].Stop();
+                PlaySound(dungeonMusicList[0]);
             }
         }
         //check if dungeonlevel,shop or boss -- 0 = normal / 1 = shop / 2 = boss
@@ -489,12 +504,19 @@ public class DungeonCreator : MonoBehaviour
         {
             case "Start":
                 //player and start obj
-                Instantiate(startPoint, middle, Quaternion.identity, parent.transform);
+                //Instantiate(startPoint, middle, Quaternion.identity, parent.transform);
                 spawnedPlayer = Instantiate(player, middle + new Vector3(0, player.gameObject.transform.localScale.y / 2, 0), Quaternion.identity, parent.transform);
                 break;
             case "End":
                 //to the next level obj
-                Instantiate(teleportZones[0], middle + new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
+                if (Random.Range(0,5) == 0)
+                {
+                    Instantiate(teleportZones[1], middle + new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
+                }
+                else
+                {
+                    Instantiate(teleportZones[0], middle + new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
+                }                
                 break;
             case "Room":
                 //set points in rooms for spawns and extra
@@ -655,8 +677,16 @@ public class DungeonCreator : MonoBehaviour
                 }
                 else
                 {
-                    //spawns coin
-                    Instantiate(currencyModel, obj.transform.position, Quaternion.Euler(90, 0, 0), gameObject.transform);
+                    //spawns coin or low chance on stat buff
+                    if (Random.Range(0,10) == 0)
+                    {
+                        var pickup = Instantiate(pickUpList[Random.Range(0, pickUpList.Count)], obj.transform.position, Quaternion.identity, gameObject.transform);
+                        pickup.GetComponent<PickUp>().currencyValue = 0;
+                    }
+                    else
+                    {
+                        Instantiate(currencyModel, obj.transform.position, Quaternion.Euler(90, 0, 0), gameObject.transform);
+                    }
                     Instantiate(effects[0], obj.transform.position, Quaternion.identity);
                 }
                 break;
@@ -683,6 +713,11 @@ public class DungeonCreator : MonoBehaviour
             default:
                 break;
         }
+    }
+    public void PlaySound(AudioSource audioSrc)
+    {
+        audioSrc.Stop();
+        audioSrc.Play();
     }
     public void ShowInstructionText(GameObject obj)
     {
@@ -715,6 +750,7 @@ public class DungeonCreator : MonoBehaviour
     public void CalculateCurrency(int amount)
     {
         currency += amount;
+
         currencyText.text = currency.ToString();
     }
     public void ApplyPickUp(GameObject pickUp,int currencyV, int pickUpV)
@@ -746,6 +782,8 @@ public class DungeonCreator : MonoBehaviour
                     break;
             }
             CalculateCurrency(-currencyV);
+            //1 = stat pickups sound
+            PlaySound(audioPickupList[1]);
             Destroy(pickUp);
         }
         else
@@ -816,14 +854,19 @@ public class DungeonCreator : MonoBehaviour
     {
         canvasUI.SetActive(false);
         gameOverCanvas.SetActive(true);
+        isDead = true;
+
         if (isBossRoom)
         {
+            bossMusicList[0].Stop();
             displayLevelReached.GetComponent<TextMeshProUGUI>().text = "You died on Boss level";
         }
         else
         {
+            dungeonMusicList[0].Stop();
             displayLevelReached.GetComponent<TextMeshProUGUI>().text = "You died on level " + (currentDungeonLevel-1).ToString();
         }
-       
+        //0 = first game over music
+        PlaySound(gameOverMusic[0]);
     }
 }

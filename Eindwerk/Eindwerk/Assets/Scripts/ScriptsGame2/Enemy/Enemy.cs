@@ -134,6 +134,8 @@ public class Enemy : MonoBehaviour
                 time = heldWeapon.baseSpeed;
                 heldWeapon.ActivateAttack();
                 anim.SetBool("IsInAttackRange", true);
+                //0 = sword wooshsound
+                dC.PlaySound(dC.audioEffectList[0]);
                 yield return new WaitForSeconds(time);
                 anim.SetBool("IsInAttackRange", false);
                 heldWeapon.DeactivateAttack();

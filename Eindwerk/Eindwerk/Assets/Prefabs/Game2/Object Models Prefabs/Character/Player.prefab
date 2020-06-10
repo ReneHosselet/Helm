@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2345121224847937232}
   m_Layer: 0
   m_Name: hand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4018552360210541984}
   m_Layer: 0
   m_Name: smallRightE
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   weapon: {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
+  heldWeapon: {fileID: 0}
   dashWings: {fileID: 6115437982585144036}
   weaponList:
   - {fileID: 1739045519499269505, guid: 2ef37bcfb2d4f0a40bb7405fbf5d865f, type: 3}
@@ -578,7 +579,7 @@ GameObject:
   - component: {fileID: 3394834892758494179}
   m_Layer: 0
   m_Name: left arm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -691,7 +692,7 @@ GameObject:
   - component: {fileID: 7987836652700559841}
   m_Layer: 0
   m_Name: left foot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +802,7 @@ GameObject:
   - component: {fileID: 6663767502202518853}
   m_Layer: 0
   m_Name: bodyparts
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1030,7 +1031,7 @@ GameObject:
   - component: {fileID: 7977654686091747330}
   m_Layer: 0
   m_Name: smallLeftE
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1109,7 +1110,7 @@ GameObject:
   - component: {fileID: 5085734147234078799}
   m_Layer: 0
   m_Name: right foot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1188,7 +1189,7 @@ GameObject:
   - component: {fileID: 419856717925233417}
   m_Layer: 0
   m_Name: helmet
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1268,7 +1269,7 @@ GameObject:
   - component: {fileID: 291385074495216380}
   m_Layer: 0
   m_Name: right arm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

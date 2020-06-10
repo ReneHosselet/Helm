@@ -6,14 +6,18 @@ public class MageShootBehaviour : StateMachineBehaviour
 {
     private Enemy enemy;
     private Transform playerPos;
+    private AudioSource fireShoot;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.gameObject.GetComponent<Enemy>();
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        fireShoot = animator.GetComponent<AudioSource>();
         //instantiate projectile
         animator.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform.position);
+        fireShoot.Stop();
+        fireShoot.Play();
         Instantiate(enemy.projectile, animator.transform.position, Quaternion.identity,animator.transform);
     }
 
